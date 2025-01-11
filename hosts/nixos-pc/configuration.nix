@@ -10,8 +10,27 @@ in {
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader = {
+    grub = {
+      enable                = true;
+      useOSProber           = true;
+      copyKernels           = true;
+      efiSupport            = true;
+      fsIdentifier          = "label";
+      devices               = [ "nodev" ];
+      extraEntries = ''
+        menuentry "Reboot" {
+          reboot
+        }
+        menuentry "Poweroff" {
+          halt
+        }
+      '';
+      };
+    };
 
   networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
