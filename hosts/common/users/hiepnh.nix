@@ -22,6 +22,7 @@ in {
       "libvirtd"
       "qemu-libvirtd"
     ];
+    shell = pkgs.fish;
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
   };
 
