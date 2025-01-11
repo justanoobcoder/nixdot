@@ -11,7 +11,7 @@ in {
   };
 
   home.file.".config/hypr" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home/config/hypr";
+    source = config.lib.file.mkOutOfStoreSymlink "${homeConfigDir}/hypr/";
     recursive = true;
   };
 

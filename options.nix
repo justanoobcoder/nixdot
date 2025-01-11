@@ -17,7 +17,7 @@ in {
   gitUsername = fullname;
   gitEmail = email;
   flakeDir = flakeDir;
-  homeConfigDir = "${flakeDir}/home/config";
+  homeConfigDir = "${flakeDir}/home/${username}/config";
   locale = "en_US.UTF-8";
   keyboardLayout = "us";
   timezone = "Asia/Ho_Chi_Minh";
