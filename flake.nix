@@ -19,15 +19,15 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
-    nvim-config = {
-      url = "git+https://github.com/justanoobcoder/nvim.git?ref=dev";
-      flake = false;
-    };
+    # nvim-config = {
+    #   url = "git+https://github.com/justanoobcoder/nvim.git?ref=dev";
+    #   flake = false;
+    # };
   };
 
   outputs = {
     self,
-    nvim-config,
+    #nvim-config,
     home-manager,
     hyprpanel,
     nixpkgs,
@@ -55,7 +55,7 @@
     };
     homeConfigurations = {
       "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages."x86_64-linux";
+        pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           ./home/${username}/${hostname}.nix

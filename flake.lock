@@ -131,30 +131,12 @@
         "type": "github"
       }
     },
-    "nvim-config": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736379825,
-        "narHash": "sha256-nTQlePx2aTYm3GZ9BwtDm/yTQgE5EPGbqr6GpcS0EbM=",
-        "ref": "dev",
-        "rev": "a745cbc7c1716d333f29940b59593962901258bd",
-        "revCount": 290,
-        "type": "git",
-        "url": "https://github.com/justanoobcoder/nvim.git"
-      },
-      "original": {
-        "ref": "dev",
-        "type": "git",
-        "url": "https://github.com/justanoobcoder/nvim.git"
-      }
-    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "hyprpanel": "hyprpanel",
         "nixpkgs": "nixpkgs_2",
-        "nixpkgs-stable": "nixpkgs-stable",
-        "nvim-config": "nvim-config"
+        "nixpkgs-stable": "nixpkgs-stable"
       }
     }
   },

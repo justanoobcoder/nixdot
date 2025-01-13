@@ -10,6 +10,7 @@ let
   gpu = "hybrid"; # available options: hybrid, nvidia, intel
 in {
   version = "24.11"; # CHANGE THIS TO CURRENT NIXOS VERSION
+  grub.enable = true; # true if use grub as bootloader, false if use systemd-boot
   username = username;
   fullname = fullname;
   hostname = hostname;

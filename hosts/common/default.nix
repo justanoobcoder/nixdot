@@ -3,7 +3,6 @@
   lib,
   inputs,
   outputs,
-  pkgs,
   ...
 }: let
   inherit (import ../../options.nix) username;
