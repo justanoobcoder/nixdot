@@ -3,6 +3,7 @@
     ./terminal.nix
     ./fonts.nix
     ./wayland.nix
+    ./theme.nix
   ];
   programs = {
     mpv.enable = true;

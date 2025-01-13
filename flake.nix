@@ -18,6 +18,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
+    hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
     nvim-config = {
       url = "git+https://github.com/justanoobcoder/nvim.git?ref=dev";
       flake = false;
@@ -28,10 +29,11 @@
     self,
     nvim-config,
     home-manager,
+    hyprpanel,
     nixpkgs,
     ...
   } @ inputs: let
-    inherit (import ./options.nix) username hostname;
+    inherit (import ./options.nix) system username hostname;
     inherit (self) outputs;
     systems = [
       "aarch64-linux"
@@ -55,7 +57,9 @@
       "${username}@${hostname}" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages."x86_64-linux";
         extraSpecialArgs = {inherit inputs outputs;};
-        modules = [./home/${username}/${hostname}.nix];
+        modules = [
+          ./home/${username}/${hostname}.nix
+        ];
       };
     };
   };

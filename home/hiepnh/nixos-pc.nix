@@ -5,6 +5,7 @@
     ./config
     ../features/cli
     ../features/gui
+    ../features/dev
   ];
 
   features = {
@@ -15,6 +16,7 @@
     };
     gui = {
       wayland.enable = true;
+      darkTheme.enable = true;
     };
   };
 

@@ -7,30 +7,12 @@ in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    #./modules
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot";
-  boot.loader = {
-    grub = {
-      enable                = true;
-      useOSProber           = true;
-      copyKernels           = true;
-      efiSupport            = true;
-      fsIdentifier          = "label";
-      devices               = [ "nodev" ];
-      extraEntries = ''
-        menuentry "Reboot" {
-          reboot
-        }
-        menuentry "Poweroff" {
-          halt
-        }
-      '';
-      };
-    };
 
   networking.hostName = hostname; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -48,16 +30,27 @@ in {
   # Select internationalisation properties.
   i18n.defaultLocale = locale;
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "vi_VN";
-    LC_IDENTIFICATION = "vi_VN";
-    LC_MEASUREMENT = "vi_VN";
-    LC_MONETARY = "vi_VN";
-    LC_NAME = "vi_VN";
-    LC_NUMERIC = "vi_VN";
-    LC_PAPER = "vi_VN";
-    LC_TELEPHONE = "vi_VN";
-    LC_TIME = "vi_VN";
+  #i18n.extraLocaleSettings = {
+  #  LC_ADDRESS = "vi_VN";
+  #  LC_IDENTIFICATION = "vi_VN";
+  #  LC_MEASUREMENT = "vi_VN";
+  #  LC_MONETARY = "vi_VN";
+  #  LC_NAME = "vi_VN";
+  #  LC_NUMERIC = "vi_VN";
+  #  LC_PAPER = "vi_VN";
+  #  LC_TELEPHONE = "vi_VN";
+  #  LC_TIME = "vi_VN";
+  #};
+
+  i18n = {
+    inputMethod = {
+      enable = true;
+      type = "fcitx5";
+      fcitx5 = {
+        addons = [pkgs.fcitx5-bamboo];
+        waylandFrontend = true;
+      };
+    };
   };
 
   # Configure keymap in X11
@@ -72,9 +65,22 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    neovim
-    git
+    gnumake
+    cmake
+    wget
+    power-profiles-daemon
+    cloudflare-warp
+    zip
+    unzip
+    ntfs3g
+    ripgrep
+    bat
+    bc
+    libnotify
+    glib
+    python3
+    python311Packages.pip
+    lua
     gcc
   ];
 
@@ -86,20 +92,64 @@ in {
   #   enableSSHSupport = true;
   # };
 
+  programs = {
+    fish.enable = true;
+    hyprland = {
+      enable = true;
+      xwayland.enable = true;
+    };
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+    };
+  };
+
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    settings.PermitRootLogin = "no";
-    allowSFTP = true;
+  services = {
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+      allowSFTP = true;
+    };
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+    };
+    #udisks2.enable = true;
+    power-profiles-daemon.enable = true;
+    upower.enable = true;
+    keyd = {
+      enable = true;
+      keyboards = {
+        default = {
+          ids = ["*"];
+          settings = {
+            main = {
+              capslock = "overload(control, esc)";
+              esc = "capslock";
+            };
+          };
+        };
+      };
+    };
   };
 
-  programs.fish.enable = true;
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+  #virtualisation.docker = {
+  #  enable = true;
+  #  enableOnBoot = false;
+  #};
+
+  systemd.services.warp-svc = {
+    description = "Cloudflare WARP";
+    serviceConfig = {
+      Type = "exec";
+      ExecStart = "/run/current-system/sw/bin/warp-svc";
+      ExecStop = "pkill warp-svc";
+      Restart = "on-failure";
+    };
+    wantedBy = ["default.target"];
   };
+  systemd.services.warp-svc.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

@@ -6,7 +6,7 @@ let
   hostname = "nixos-pc";
   # run `mkpasswd -m sha-512 yourpassword` to generate the hashed password
   hashedPassword = "$6$oZdux9tYWX4C5UvT$AS91kxEq43FPPZX/In289dgVIo6NYphArKDt5QhGMABaiS8XsO8uq/JLvHxkXKvNLe471R3ZPdL52CXMkQU5B.";
-  flakeDir = "/home/${username}/dotfiles"; # the directory where you cloned this repository
+  flakeDir = "/home/${username}/.dotfiles"; # the directory where you cloned this repository
   gpu = "hybrid"; # available options: hybrid, nvidia, intel
 in {
   version = "24.11"; # CHANGE THIS TO CURRENT NIXOS VERSION

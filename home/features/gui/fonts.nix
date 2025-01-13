@@ -7,5 +7,7 @@
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     liberation_ttf
+
+    hyprpanel
   ];
 }

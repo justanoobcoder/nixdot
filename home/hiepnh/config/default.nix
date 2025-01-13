@@ -3,12 +3,12 @@
   inputs,
   ...
 }: let
-  inherit (import ../../../options.nix) flakeDir homeConfigDir;
+  inherit (import ../../../options.nix) flakeDir homeConfigDir username;
 in {
-  home.file.".config/nvim" = {
-    source = "${inputs.nvim-config}";
-    recursive = true;
-  };
+  #home.file.".config/nvim" = {
+  #  source = "${inputs.nvim-config}";
+  #  recursive = true;
+  #};
 
   home.file.".config/hypr" = {
     source = config.lib.file.mkOutOfStoreSymlink "${homeConfigDir}/hypr/";
@@ -27,7 +27,7 @@ in {
     };
 
     ".local/bin" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home/bin";
+      source = config.lib.file.mkOutOfStoreSymlink "${flakeDir}/home/${username}/bin";
       recursive = true;
     };
 

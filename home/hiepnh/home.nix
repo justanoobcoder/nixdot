@@ -7,7 +7,7 @@
   pkgs,
   ...
 }: let
-  inherit (import ../../options.nix) username version;
+  inherit (import ../../options.nix) username version terminal;
 in {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -75,9 +75,32 @@ in {
   #  /etc/profiles/per-user/m3tam3re/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    DOTFILES_DIR = "$HOME/.dotfiles";
+    TERMINAL = terminal.name;
+    BROWSER = "brave";
+    XMODIFIERS = "@im=fcitx";
+    QT_IM_MODULE = "fcitx";
+    QT4_IM_MODULE = "fcitx";
+    CLUTTER_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "fcitx";
+    DOCKER_CONFIG = "$HOME/.config/docker";
+    MACHINE_STORAGE_PATH = "$HOME/.local/share/docker-machine";
+    CARGO_HOME = "$HOME/.local/share/cargo";
+    RUSTUP_HOME = "$HOME/.local/share/rustup";
+    GOMODCACHE = "$HOME/.cache/go/mod";
+    GRADLE_USER_HOME = "$HOME/.local/share/gradle";
+    WGETRC = "$HOME/.config/wget/wgetrc";
+    TERMINFO = "$HOME/.local/share/terminfo";
+    TERMINFO_DIRS = "$HOME/.local/share/terminfo:/usr/share/terminfo";
+    LESSHISTFILE = "-";
+    NPM_CONFIG_USERCONFIG = "$HOME/.config/npm/npmrc";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
+    NIXOS_OZONE_WL = "1";
+    PATH = ''$PATH:$HOME/.local/share/npm/bin:$HOME/.local/share/go/bin:$(du "$HOME/.local/bin/" | cut -f2 | paste -sd ':')'';
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.git.enable = true;
 }

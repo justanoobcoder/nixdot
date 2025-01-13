@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  inherit (import ../../../options.nix) flakeDir;
+  inherit (import ../../../options.nix) flakeDir username;
   name = "fish";
   cfg = config.features.cli.${name};
 in {
@@ -55,13 +55,13 @@ in {
           cd (ls $repodir | fzf --layout=reverse --height 40% --border || echo .)'';
 
         cfh = ''
-          set file (find ${flakeDir}/home/config/hypr -type f | fzf --layout=reverse --height 40% --border)
+          set file (find ${flakeDir}/home/${username}/config/hypr -type f | fzf --layout=reverse --height 40% --border)
           [ -z "$file" ] || $EDITOR $file'';
 
         mcd = "mkdir -p $argv[1] && cd $argv[1]";
 
         fb = ''
-          set file (find ${flakeDir}/home/bin -type f | fzf --layout=reverse --height 40% --border)
+          set file (find ${flakeDir}/home/${username}/bin -type f | fzf --layout=reverse --height 40% --border)
           [ -z "$file" ] || $EDITOR $file'';
 
         y = ''
