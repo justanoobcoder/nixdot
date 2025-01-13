@@ -16,6 +16,7 @@
     };
     gui = {
       wayland.enable = true;
+      wofi.enable = true;
       darkTheme.enable = true;
     };
   };

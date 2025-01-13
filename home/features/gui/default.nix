@@ -4,6 +4,7 @@
     ./fonts.nix
     ./wayland.nix
     ./theme.nix
+    ./wofi.nix
   ];
   programs = {
     mpv.enable = true;
