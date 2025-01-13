@@ -19,6 +19,7 @@
       screenshot.enable = true;
       wofi.enable = true;
       darkTheme.enable = true;
+      cliphist.enable = true;
     };
   };
 

@@ -6,6 +6,7 @@
     ./theme.nix
     ./wofi.nix
     ./screenshot.nix
+    ./cliphist.nix
   ];
   programs = {
     mpv.enable = true;
