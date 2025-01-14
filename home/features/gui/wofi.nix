@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib; let
@@ -11,13 +10,8 @@ in {
   options.features.gui.${name}.enable = mkEnableOption "Install app launcher Wofi";
 
   config = mkIf cfg.enable {
-    programs.wofi = let
-      wofiWithImage = pkgs.wofi.overrideAttrs (oldAttrs: {
-        buildInputs = oldAttrs.buildInputs ++ [pkgs.imagemagick];
-      });
-    in {
+    programs.wofi = {
       enable = true;
-      package = wofiWithImage;
       settings = {
         allow_images = true;
         insensitive = true;
