@@ -21,7 +21,7 @@ in {
           exec Hyprland
         end'';
       shellAliases = {
-        ud = "nixos-rebuild switch --use-remote-sudo --flake ${flakeDir}";
+        ud = "sudo nixos-rebuild switch  --flake ${flakeDir}";
         ls = "eza --group-directories-first";
         ll = "eza -lbg --icons";
         la = "eza -a";
