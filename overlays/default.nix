@@ -9,7 +9,7 @@
     # example = prev.example.overrideAttrs (oldAttrs: rec {
     # ...
     # });
-    fastfetch = import ./mods/fastfetch.nix {inherit prev;};
+    #fastfetch = import ./mods/fastfetch.nix {inherit prev;};
   };
 
   stable-packages = final: _prev: {
