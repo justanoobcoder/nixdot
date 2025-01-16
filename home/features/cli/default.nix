@@ -33,5 +33,7 @@
     xdg-utils
     gum
     fd
+    jq
+    playerctl
   ];
 }

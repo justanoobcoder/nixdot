@@ -17,5 +17,6 @@
     brave
     xfce.thunar
     imv
+    spotify
   ];
 }

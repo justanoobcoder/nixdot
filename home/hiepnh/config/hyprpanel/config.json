@@ -40,5 +40,7 @@
   "menus.dashboard.stats.interval": 2500,
   "menus.dashboard.powermenu.shutdown": "warp-cli disconnect ; systemctl poweroff",
   "menus.dashboard.powermenu.reboot": "warp-cli disconnect ; systemctl reboot",
-  "menus.dashboard.shortcuts.left.shortcut4.command": "wofi --show drun"
+  "menus.dashboard.shortcuts.left.shortcut4.command": "wofi --show drun",
+  "menus.dashboard.shortcuts.left.shortcut2.command": "spotify",
+  "menus.dashboard.powermenu.avatar.image": "/home/hiepnh/.config/hypr/hyprlock/assets/profile.png"
 }
