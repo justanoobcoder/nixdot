@@ -76,6 +76,12 @@ in {
           sesh connect \
               $(sesh list -i | \
             gum filter --limit 1 --no-sort --no-fuzzy --placeholder 'Pick a session' --prompt='⚡')'';
+
+        bwin = ''
+          set winboot (efibootmgr | grep "Windows Boot Manager" |
+                  cut -d'*' -f1 | cut -d't' -f2)
+              warp-cli disconnect
+              sudo efibootmgr --bootnext $winboot && rb'';
       };
     };
   };
