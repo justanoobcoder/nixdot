@@ -1,4 +1,4 @@
-let
+{pkgs, ...}: let
   inherit (import ../../../options.nix) grub;
 
   grubConfig = {
@@ -20,4 +20,8 @@ in {
     if grub.enable
     then grubConfig
     else systemdBootConfig;
+
+  environment.systemPackages = with pkgs; [
+    efibootmgr
+  ];
 }
